@@ -4,11 +4,11 @@
 
 template<typename T>
 void Process(const T& form) {
-    std::cout<<form.GetCenter()<<"\n";
-
+    std::cout<<form.GetForm().first<<","<<form.GetForm().second<<"\n";
+}
 class Shape {
 protected:
-    std::pair<int, int> Form;
+    std::pair<int, int> form;
 public:
     Shape(int h, int w): form(h,w){}
     std::pair<int, int> GetForm() const {
@@ -18,9 +18,9 @@ public:
     virtual ~Shape(){}
 };
 
-class quadrangle: public Shape {
+class Quadrangle: public Shape {
 public:
-    quadrangle(const std::string& n): Shape(n){}
+    Quadrangle(int h, int w): Shape(h, w){}
     std::string rectangle() const override{
         return "4";
     }
@@ -28,7 +28,7 @@ public:
 
 int main() {
     std::vector<Shape*> figure;
-    figure.push_back(new quadrangle("square"));
+    figure.push_back(new Quadrangle(10,20));
     Process(*figure[0]);
     for(Shape* shape: figure) {
         delete shape;
